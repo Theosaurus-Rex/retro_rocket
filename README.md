@@ -1,25 +1,34 @@
-# README
+# RetroRocket Retro & Vintage Toys
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About the Project
 
-Things you may want to cover:
+RetroRocket is a two-sided marketplace for reconnecting with your inner child. Find your childhood toys of the past, or list your own treasures for sale to go to a loving new home.
 
-* Ruby version
+This marketplace specialises in retro and vintage toys from the 90s and earlier. Listings on the site are categorised according to the nature of the toy, so you can find exactly what you're looking for. 
 
-* System dependencies
+## Scope
 
-* Configuration
+RetroRocket is designed for Australian users, and targeted at users aged 20-50 years old. The website design aims to be easy to use on both mobile and desktop devices to allow for ease of access across all age groups.
 
-* Database creation
+## Tech Stack
 
-* Database initialization
+### Build & Deployment:
+- Ruby
+- Ruby on Rails
+- JavaScript
+- HTML & CSS
+- Tailwind CSS
+- Heroku
 
-* How to run the test suite
+### Design & Project Management
+- Balsamiq (Wireframes)
+- Trello (Task Management)
+- GitHub (Version Control)
 
-* Services (job queues, cache servers, search engines, etc.)
+### Testing
+- rspec for Rails (Automated Testing)
+- FactoryBot (Test Generating for Automated Tests)
 
-* Deployment instructions
-
-* ...
-# retro_rocket
+### Payments & Security
+- Stripe (Payment Processing)
+- Devise (User Authentication)
