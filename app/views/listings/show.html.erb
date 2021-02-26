@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Seller:</strong>
   <%= @listing.user_id %>
 </p>
 
@@ -29,6 +29,13 @@
   <strong>Category:</strong>
   <%= @listing.category_id %>
 </p>
+
+<% if @listing.photo.attached? %>
+<p>
+  <strong>Photo:</strong>
+  <%= image_tag @listing.photo %>
+</p>
+<% end %>
 
 <% if current_user == @listing.user %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
