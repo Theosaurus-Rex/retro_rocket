@@ -63,3 +63,7 @@ end
 
 # Devise for user authentication
 gem 'devise'
+
+# Cloudinary for media hosting
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'
