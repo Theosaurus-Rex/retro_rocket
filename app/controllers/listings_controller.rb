@@ -12,9 +12,9 @@ class ListingsController < ApplicationController
       payment_method_types: ['card'],
       customer_email: current_user.email,
       line_items: [{
-        name: @listing.title,
-        description: @listing.description,
-        amount: @listing.price,
+        name: @listing.listing_title,
+        description: @listing.listing_description,
+        amount: @listing.price.to_i * 100,
         currency: 'aud',
         quantity: 1
       }],
@@ -27,9 +27,11 @@ class ListingsController < ApplicationController
       success_url: "#{root_url}payments/success?listing_id=#{@listing.id}", 
       cancel_url: "#{root_url}listings"
     )
+  
+  @session_id = session.id
   end
 
-  @session_id = session.id
+  
 
   # GET /listings/new
   def new
