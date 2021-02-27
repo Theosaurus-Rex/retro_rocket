@@ -67,3 +67,6 @@ gem 'devise'
 # Cloudinary for media hosting
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
+
+# Stripe for payments
+gem 'stripe'
