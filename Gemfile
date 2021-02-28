@@ -71,5 +71,4 @@ gem 'activestorage-cloudinary-service'
 # Stripe for payments
 gem 'stripe'
 
-# Ultrahook used to provide webhook for sold listing updates
 gem 'ultrahook'
