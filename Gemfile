@@ -70,3 +70,5 @@ gem 'activestorage-cloudinary-service'
 
 # Stripe for payments
 gem 'stripe'
+
+gem 'ultrahook'

@@ -37,9 +37,18 @@
 </p>
 <% end %>
 
-<button data-stripe="payment">
-  Buy Now
-</button>
+<% if (@listing.sold == true) %>
+  <p>Item has been sold.</p>
+<% else %>
+  <% if user_signed_in? %>
+    <button data-stripe="payment">
+      Buy Now
+    </button> 
+  <% else %>
+    <%= button_to "Buy Now", new_user_registration_path, method: :get %>
+  <% end %>
+<% end %>
+
 
 <script src="https://js.stripe.com/v3/"></script>
 
