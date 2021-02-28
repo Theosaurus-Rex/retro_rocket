@@ -8,27 +8,29 @@ class ListingsController < ApplicationController
 
   # GET /listings/1 or /listings/1.json
   def show
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      customer_email: current_user.email,
-      line_items: [{
-        name: @listing.listing_title,
-        description: @listing.listing_description,
-        amount: @listing.price.to_i * 100,
-        currency: 'aud',
-        quantity: 1
-      }],
-      payment_intent_data: {
-        metadata: {
-          user_id: current_user.id,
-          listing_id: @listing.id
-        }
-      },
-      success_url: "#{root_url}payments/success?listing_id=#{@listing.id}", 
-      cancel_url: "#{root_url}listings"
-    )
-  
-  @session_id = session.id
+    if user_signed_in?
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @listing.listing_title,
+          description: @listing.listing_description,
+          amount: @listing.price.to_i * 100,
+          currency: 'aud',
+          quantity: 1
+        }],
+        payment_intent_data: {
+          metadata: {
+            user_id: current_user.id,
+            listing_id: @listing.id
+          }
+        },
+        success_url: "#{root_url}payments/success?listing_id=#{@listing.id}", 
+        cancel_url: "#{root_url}listings"
+      )
+    
+    @session_id = session.id
+  end
   end
 
   
