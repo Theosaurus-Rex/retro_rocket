@@ -21,7 +21,7 @@
         <td><%= listing.listing_description %></td>
         <td><%= listing.price %></td>
         <td><%= listing.condition %></td>
-        <td><%= listing.category_id %></td>
+        <td><%= Category.find(listing.category_id).category_name %></td>
         <td><%= link_to 'Show', listing %></td>
         <% if current_user == listing.user %>
         <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
