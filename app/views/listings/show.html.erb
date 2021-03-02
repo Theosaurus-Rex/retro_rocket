@@ -27,7 +27,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @listing.category_id %>
+  <%= Category.find(@listing.category_id).category_name %>
 </p>
 
 <% if @listing.photo.attached? %>
