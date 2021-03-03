@@ -1,36 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listings</h1>
+<h1>All Items</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Listing title</th>
-      <th>Listing description</th>
-      <th>Price</th>
-      <th>Condition</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @listings.each do |listing| %>
-      <tr>
-        <td><%= listing.listing_title %></td>
-        <td><%= listing.listing_description %></td>
-        <td><%= listing.price %></td>
-        <td><%= listing.condition %></td>
-        <td><%= Category.find(listing.category_id).category_name %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <% if current_user == listing.user %>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @listings.each do |listing| %>
+  <div id="product-card">
+    <h3><%= listing.listing_title %></h3>
+    <p>$<%= listing.price %></p>
+    <%= image_tag listing.photo %>
+    <%= link_to "View Item", listing_path(listing.id) %>
+  </div>
+<% end %>
 
 <br>
 
