@@ -1,18 +1,17 @@
 <p id="notice"><%= notice %></p>
-<main class="min-w-full flex  justify-center items-center flex-col">
-  <h1 class="">All Items</h1>
-  <div class="flex flex-wrap justify-center">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> 
+<main class=" bg-gray-200 min-w-full flex  justify-center items-center flex-col">
+  <h1 class="font-heading text-6xl text-red-600 m-5">All Items</h1>
+  <div class="flex flex-wrap justify-center min-w-full">
     <% @listings.each do |listing| %>
-      <div id="product-card" class="w-96 flex flex-col max-h-96 m-12 justify-center items-center">
-        <h3><%= listing.listing_title %></h3>
+      <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
+        <h3 class="text-lg font-semibold text-center"><%= listing.listing_title %></h3>
         <p>$<%= listing.price %></p>
         <%= image_tag listing.photo, class: "object-contain" %>
-        <%= link_to "View Item", listing_path(listing.id) %>
+        <%= link_to "View Item >", listing_path(listing.id), class: "rounded-xl bg-gray-700 text-white font-semibold hover:bg-gray-900 m-3 px-4 py-2" %>
       </div>
     <% end %>
   </div>
-  <br>
-  <br>
-  <br>
-  <%= link_to 'New Listing', new_listing_path, class: "" %>
+  
+  <%= link_to 'New Listing', new_listing_path, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
 </main>
