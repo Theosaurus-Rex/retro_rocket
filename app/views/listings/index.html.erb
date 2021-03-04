@@ -1,16 +1,18 @@
 <p id="notice"><%= notice %></p>
-
-<h1>All Items</h1>
-
-<% @listings.each do |listing| %>
-  <div id="product-card">
-    <h3><%= listing.listing_title %></h3>
-    <p>$<%= listing.price %></p>
-    <%= image_tag listing.photo %>
-    <%= link_to "View Item", listing_path(listing.id) %>
+<main class="min-w-full flex  justify-center items-center flex-col">
+  <h1 class="">All Items</h1>
+  <div class="flex flex-wrap justify-center">
+    <% @listings.each do |listing| %>
+      <div id="product-card" class="w-96 flex flex-col max-h-96 m-12 justify-center items-center">
+        <h3><%= listing.listing_title %></h3>
+        <p>$<%= listing.price %></p>
+        <%= image_tag listing.photo, class: "object-contain" %>
+        <%= link_to "View Item", listing_path(listing.id) %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<br>
-
-<%= link_to 'New Listing', new_listing_path %>
+  <br>
+  <br>
+  <br>
+  <%= link_to 'New Listing', new_listing_path, class: "" %>
+</main>
