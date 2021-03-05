@@ -10,7 +10,8 @@
             <%# TODO: Add profile link %>
             <%= link_to "Sign Out", destroy_user_session_path, class: "hover:text-red-500", method: :delete%>
         <% else %>
-            <%= link_to "Sign In", new_user_session_path, class: "hover:text-red-500" %> |
+            <%= link_to "Sign In", new_user_session_path, class: "hover:text-red-500" %>
+                <p>|</p>
             <%= link_to "Sign Up", new_user_registration_path, class: "hover:text-red-500" %>
         <% end %>
     </div>
