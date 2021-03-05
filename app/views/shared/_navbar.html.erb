@@ -1,13 +1,15 @@
 <nav class="bg-gray-900 text-white flex justify-between items-center">
-    <div id="icon" class="w-36">
+    <div id="logo" class="w-36">
         <%= image_tag("logo.png") %>
     </div>
     <div id="nav-links" class="flex p-4 space-x-3 text-xl">
         <%= link_to "Home", listings_path, class: "hover:text-red-500" %>
         <%= link_to "Categories", categories_path, class: "hover:text-red-500" %>
+        
 
         <% if user_signed_in? %>
             <%# TODO: Add profile link %>
+            <%= link_to "Create Listing", new_listing_path, class: "hover:text-red-500" %>
             <%= link_to "Sign Out", destroy_user_session_path, class: "hover:text-red-500", method: :delete%>
         <% else %>
             <%= link_to "Sign In", new_user_session_path, class: "hover:text-red-500" %>
