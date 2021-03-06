@@ -1,0 +1,15 @@
+<h1> Hey there, <%= current_user.username %>! </h1>
+
+<h2> Your Current Listings </h2>
+
+<% user_listings = Listing.where(user_id: current_user.id, sold: false) %>
+<div class="flex flex-wrap justify-center min-w-full">
+    <% user_listings.each do |listing| %>
+      <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
+        <h3 class="text-lg font-semibold text-center"><%= listing.listing_title %></h3>
+        <p>$<%= listing.price %></p>
+        <%= image_tag listing.photo, class: "object-contain" %>
+        <%= link_to "View Item >", listing_path(listing.id), class: "rounded-xl bg-gray-700 text-white font-semibold hover:bg-gray-900 m-3 px-4 py-2" %>
+      </div>
+    <% end %>
+</div>
