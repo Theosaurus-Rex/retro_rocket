@@ -13,5 +13,7 @@
     <% end %>
   </div>
   
+  <% if user_signed_in? %>
   <%= link_to 'New Listing', new_listing_path, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
+  <% end %>
 </main>
