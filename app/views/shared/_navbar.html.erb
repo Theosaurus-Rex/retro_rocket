@@ -10,6 +10,7 @@
         <% if user_signed_in? %>
             <%# TODO: Add profile link %>
             <%= link_to "Create Listing", new_listing_path, class: "hover:text-red-500" %>
+            <%= link_to "Profile", profile_path, class: "hover:text-red-500" %>
             <%= link_to "Sign Out", destroy_user_session_path, class: "hover:text-red-500", method: :delete%>
         <% else %>
             <%= link_to "Sign In", new_user_session_path, class: "hover:text-red-500" %>

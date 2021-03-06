@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   root to: "listings#index"
   get "/payments/success", to: 'payments#success'
   post "/payments/webhook", to: 'payments#webhook'
+  get "/users/profile", to: 'users#profile', as: 'profile'
 end
