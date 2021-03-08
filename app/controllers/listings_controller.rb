@@ -6,6 +6,16 @@ class ListingsController < ApplicationController
     @listings = Listing.all
   end
 
+  # Search Listings Table
+  def search  
+    if params[:search].blank?  
+      redirect_to(listings_path, alert: "Empty field!") and return  
+    else  
+      @parameter = params[:search].downcase  
+      @results = Listing.all.where("lower(listing_title) LIKE :search", search: "%#{@parameter}%")
+    end  
+  end
+
   # GET /listings/1 or /listings/1.json
   def show
     if user_signed_in?
