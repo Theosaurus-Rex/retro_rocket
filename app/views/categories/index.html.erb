@@ -4,9 +4,7 @@
 
   <div class="flex flex-wrap justify-center min-w-full">
     <% @categories.each do |category| %>
-    <div id="category-title-card" class="p-4 bg-red-500 hover:bg-red-700 text-white text-2xl container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
-      <%= link_to category.category_name, category_path(category.id) %>
-    </div>
+      <%= link_to category.category_name, category_path(category.id), class: 'font-heading text-4xl p-10 bg-red-500 hover:bg-red-700 text-white text-2xl container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md' %>
     <% end %>
   </div>
 
