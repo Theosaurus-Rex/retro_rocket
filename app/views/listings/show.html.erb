@@ -1,53 +1,55 @@
+
 <p id="notice"><%= notice %></p>
+<main class=" bg-gray-200 min-w-full min-h-screen flex items-center flex-col ">
 
-<p>
-  <strong>Listing title:</strong>
-  <%= @listing.listing_title %>
-</p>
-
-<p>
-  <strong>Listing description:</strong>
-  <%= @listing.listing_description %>
-</p>
-
-<p>
-  <strong>Seller:</strong>
-  <%= @listing.user_id %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
-</p>
-
-<p>
-  <strong>Condition:</strong>
-  <%= @listing.condition %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= Category.find(@listing.category_id).category_name %>
-</p>
-
-<% if @listing.photo.attached? %>
-<p>
-  <strong>Photo:</strong>
-  <%= image_tag @listing.photo %>
-</p>
-<% end %>
-
-<% if (@listing.sold == true) %>
-  <p>Item has been sold.</p>
-<% else %>
-  <% if user_signed_in? %>
-    <button data-stripe="payment">
-      Buy Now
-    </button> 
-  <% else %>
-    <%= button_to "Buy Now", new_user_registration_path, method: :get %>
+<div id="listing-content" class="flex">
+  <% if @listing.photo.attached? %>
+  <p>
+    <%= image_tag @listing.photo, class: "m-10 rounded-md shadow-lg" %>
+  </p>
   <% end %>
-<% end %>
+
+
+<div id="product-info" class="flex flex-col flex-wrap m-10">
+  <h1 class="text-2xl font-bold m-3">
+    <%= @listing.listing_title %>
+  </h1>
+
+  <p class="text-xl font-bold text-red-500 m-3">
+    $<%= @listing.price %>
+  </p>
+
+  <p class="m-3">
+    <%= @listing.listing_description %>
+  </p>
+
+  <p class="m-3">
+    <strong>Seller:</strong> <%= User.find(@listing.user_id).username %>
+  </p>
+
+  <p class="m-3">
+    <strong>Condition:</strong>
+    <%= @listing.condition %>
+  </p>
+
+  <p class="m-3">
+    <strong>Category:</strong>
+    <%= Category.find(@listing.category_id).category_name %>
+  </p>
+
+  <% if (@listing.sold == true) %>
+    <p>Item has been sold.</p>
+  <% else %>
+    <% if user_signed_in? %>
+      <button data-stripe="payment", class= "m-5 px-2 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900">
+        Buy Now
+      </button> 
+    <% else %>
+      <%= button_to "Buy Now", new_user_registration_path, method: :get, class: "m-5 px-2 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
+    <% end %>
+  <% end %>
+</div>
+</div>
 
 
 <script src="https://js.stripe.com/v3/"></script>
@@ -65,11 +67,15 @@
       })
     })
 </script>
+ <hr class="text-black">
 
+<div id="crud-links" class="flex">
 <% if current_user == @listing.user || current_user.admin %>
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Edit', edit_listing_path(@listing), class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %> 
 <%= link_to 'Delete', listing_path(@listing),
        method: :delete,
-          data: { confirm: "Are you sure?" } %> |
+          data: { confirm: "Are you sure?" }, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %> 
 <% end %>
-<%= link_to 'Back', listings_path %>
+<%= link_to 'Back', listings_path, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
+</div>
+</main>
