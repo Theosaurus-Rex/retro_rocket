@@ -70,7 +70,7 @@
  <hr class="text-black">
 
 <div id="crud-links" class="flex">
-<% if current_user == @listing.user || current_user.admin? %>
+<% if current_user == @listing.user  %>
 <%= link_to 'Edit', edit_listing_path(@listing), class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %> 
 <%= link_to 'Delete', listing_path(@listing),
        method: :delete,
