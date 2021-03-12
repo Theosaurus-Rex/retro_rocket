@@ -1,3 +1,4 @@
+
 <%= form_with(model: listing, local: true) do |form| %>
   <% if listing.errors.any? %>
     <div id="error_explanation">
@@ -10,38 +11,43 @@
       </ul>
     </div>
   <% end %>
+<div id="form-fields" class="flex flex-col pl-36" >
+    <div class="field">
+      <%= form.label :listing_title, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" %><br>
+      <%= form.text_field :listing_title, class: "border py-2 px-3 text-grey-darkest md:mr-2" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :listing_title %>
-    <%= form.text_field :listing_title %>
+    <div class="field">
+      <%= form.label :listing_description, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest"  %><br>
+      <%= form.text_area :listing_description %>
+    </div>
+
+    <div class="field">
+      <%= form.label :price, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest"  %><br>
+      <%= form.number_field :price %>
+    </div>
+
+    <div class="field">
+      <%= form.label :condition, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest"  %><br>
+      <%= form.select :condition, ["In Box", "New", "Used", "Damaged"] %>
+    </div>
+
+    <div class="field">
+      <%= form.label :category_id, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest"  %><br>
+      <%= form.collection_select :category_id, Category.all, :id, :category_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :photo, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest"  %><br>
+      <%= form.file_field :photo %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Create Listing', class: "m-5 px-2 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900"  %>
+    </div>
+    
   </div>
 
-  <div class="field">
-    <%= form.label :listing_description %>
-    <%= form.text_area :listing_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :condition %>
-    <%= form.select :condition, ["In Box", "New", "Used", "Damaged"] %>
-  </div>
-
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :category_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :photo %>
-    <%= form.file_field :photo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
 <% end %>
+
