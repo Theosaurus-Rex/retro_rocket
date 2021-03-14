@@ -1,20 +1,23 @@
-<h2>Sign up</h2>
+<main class=" bg-gray-200 min-w-full flex min-h-screen  items-center flex-col pb-10">
 
+<h2 class="font-heading text-6xl text-red-600 m-5">Sign up</h2>
+
+<div id="form-fields" class="flex flex-col" >
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :username %><br />
+    <%= f.label :username, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" %><br />
     <%= f.text_field :username, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -22,13 +25,16 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, class: "mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions flex justify-center">
+    <%= f.submit "Sign up", class: "m-5 px-2 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
   </div>
 <% end %>
+</div>
 
 <%= render "devise/shared/links" %>
+
+</main>
