@@ -2,7 +2,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> 
 <main class=" bg-gray-200 min-w-full flex  justify-center items-center flex-col">
   <h1 class="font-heading text-6xl text-red-600 m-5">All Items</h1>
+  <%# Listings gallery  %>
   <div class="flex flex-wrap justify-center min-w-full">
+    <%# Generate card for each listing  %>
     <% @listings.each do |listing| %>
       <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
         <h3 class="text-lg font-semibold text-center"><%= listing.listing_title %></h3>
@@ -13,6 +15,7 @@
     <% end %>
   </div>
   
+  <%# Allow new listings if user is signed in  %>
   <% if user_signed_in? %>
   <%= link_to 'New Listing', new_listing_path, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
   <% end %>

@@ -1,9 +1,11 @@
 class PaymentsController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:webhook]
 
+    # Action for successful payment route
     def success
     end
 
+    # Update listing status to "sold: true" when purchased.
     def webhook
         payment_id = params[:data][:object][:payment_intent]
         payment = Stripe::PaymentIntent.retrieve(payment_id)

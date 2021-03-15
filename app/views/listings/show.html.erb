@@ -1,7 +1,7 @@
 
 <p id="notice"><%= notice %></p>
 <main class=" bg-gray-200 min-w-full min-h-screen flex items-center flex-col ">
-
+<%# List attributes for this listing  %>
 <div id="listing-content" class="flex">
   <% if @listing.photo.attached? %>
   <p>
@@ -37,13 +37,16 @@
     <%= Category.find(@listing.category_id).category_name %>
   </p>
 
+<%# Display a message if item has been sold already %>
   <% if (@listing.sold == true) %>
     <p>Item has been sold.</p>
   <% else %>
+  <%# Create Buy Now button if user is signed in  %>
     <% if user_signed_in? %>
       <button data-stripe="payment", class= "m-5 px-2 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900">
         Buy Now
       </button> 
+      <%# Redirect to sign up if user not logged in  %>
     <% else %>
       <%= button_to "Buy Now", new_user_registration_path, method: :get, class: "m-5 px-2 py-2 bg-red-600 rounded-xl text-white font-semibold shadow-lg hover:bg-red-900" %>
     <% end %>

@@ -1,6 +1,6 @@
 <h3>Search Result</h3>  
 
-   
+<%# Generate card for each listing returned by search  %>
 <% @results.each do |result| %>
       <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
         <h3 class="text-lg font-semibold text-center"><%= result.listing_title %></h3>

@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     @listings = Listing.all
   end
 
-  # Search Listings Table
+  # Search Listings Table using parameters from Search Bar
   def search  
     if params[:search].blank?  
       redirect_to(listings_path, alert: "Empty field!") and return  

@@ -1,24 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <main class=" bg-gray-200 min-w-full flex  items-center flex-col pb-10 min-h-screen">
-<h1 class="font-heading text-6xl text-red-600 m-5">
-  <%= @category.category_name %>
-</h1>
-<div class="flex flex-wrap justify-center min-w-full">
-<% @category_listings.each do |listing| %>
-      <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
-        <h3 class="text-lg font-semibold text-center"><%= listing.listing_title %></h3>
-        <p>$<%= listing.price %></p>
-        <%= image_tag listing.photo, class: "object-contain" %>
-        <%= link_to "View Item >", listing_path(listing.id), class: "rounded-xl bg-gray-700 text-white font-semibold hover:bg-gray-900 m-3 px-4 py-2" %>
-      </div>
-    <% end %>
-</div>
+  <%# Show current category name as heading  %>
+  <h1 class="font-heading text-6xl text-red-600 m-5">
+    <%= @category.category_name %>
+  </h1>
+  <%# Listing gallery %>
+  <div class="flex flex-wrap justify-center min-w-full">
+  <%# Generate card for each listing with this category  %>
+  <% @category_listings.each do |listing| %>
+        <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
+          <h3 class="text-lg font-semibold text-center"><%= listing.listing_title %></h3>
+          <p>$<%= listing.price %></p>
+          <%= image_tag listing.photo, class: "object-contain" %>
+          <%= link_to "View Item >", listing_path(listing.id), class: "rounded-xl bg-gray-700 text-white font-semibold hover:bg-gray-900 m-3 px-4 py-2" %>
+        </div>
+      <% end %>
+  </div>
 
-<div id="links">
-<% if current_user.admin %>
-<%= link_to 'Edit', edit_category_path(@category), class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-lg text-white font-semibold shadow-lg hover:bg-red-900" %> 
-<% end %>
-<%= link_to 'Back', categories_path, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-lg text-white font-semibold shadow-lg hover:bg-red-900" %>
-</div>
+  <div id="links">
+  <%# Allow editing category if user is an admin  %>
+  <% if current_user.admin %>
+  <%= link_to 'Edit', edit_category_path(@category), class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-lg text-white font-semibold shadow-lg hover:bg-red-900" %> 
+  <% end %>
+  <%= link_to 'Back', categories_path, class: "m-5 px-4 py-2 bg-red-600 rounded-xl text-lg text-white font-semibold shadow-lg hover:bg-red-900" %>
+  </div>
 </main>
