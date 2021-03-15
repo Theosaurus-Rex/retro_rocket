@@ -1,9 +1,11 @@
 <div class=" bg-gray-200 min-w-full flex  justify-center items-center flex-col">
 
+<%# Greet user by username  %>
 <h1 class="text-4xl m-5"> Hey there, <%= current_user.username %>! </h1>
 
 <h2 class="font-heading text-4xl text-red-600 m-5"> Your Current Listings </h2>
 
+<%# Show the listings that have the current user listed as the seller  %>
 <% user_listings = Listing.where(user_id: current_user.id, sold: false) %>
 <div class="flex flex-wrap justify-center min-w-full">
     <% user_listings.each do |listing| %>
