@@ -6,10 +6,10 @@
   <div class="flex flex-wrap justify-center min-w-full">
     <%# Generate card for each listing  %>
     <% @listings.each do |listing| %>
-      <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
+      <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md max-h-96">
         <h3 class="text-lg font-semibold text-center"><%= listing.listing_title %></h3>
         <p>$<%= listing.price %></p>
-        <%= image_tag listing.photo %>
+        <%= image_tag listing.photo, class: "max-h-60" %>
         <%= link_to "View Item >", listing_path(listing.id), class: "rounded-xl bg-gray-700 text-white font-semibold hover:bg-gray-900 m-3 px-4 py-2" %>
       </div>
     <% end %>
