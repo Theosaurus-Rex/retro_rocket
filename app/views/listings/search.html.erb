@@ -1,5 +1,8 @@
-<h3>Search Result</h3>  
+<main class=" bg-gray-200 min-w-full flex  justify-center items-center flex-col">
 
+<h3 class="font-heading text-6xl text-red-600 m-5">Search Result</h3>  
+<%# Listings gallery  %>
+<div class="flex flex-wrap justify-center min-w-full">
 <%# Generate card for each listing returned by search  %>
 <% @results.each do |result| %>
       <div id="product-card" class="p-4 bg-white container shadow-md max-w-xs flex flex-col  m-10 justify-center items-center rounded-md">
@@ -9,3 +12,6 @@
         <%= link_to "View Item >", listing_path(result.id), class: "rounded-xl bg-gray-700 text-white font-semibold hover:bg-gray-900 m-3 px-4 py-2" %>
       </div>
     <% end %>
+  </div>
+
+</main>
