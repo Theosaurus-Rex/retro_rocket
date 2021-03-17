@@ -30,16 +30,19 @@ The purpose of RetroRocket is to easily connect owners of vintage and retro toys
 
 - User sign-up to allow posting and purchasing different items on the site
 - Categorisation of products
-- Search filter system (TO-DO)
-- Image upload to allow users to show off the condition of their toys **(TO-DO)**
-- Listing bookmarks feature for registered users **(TO-DO)**
-- Calculated shipping using Australia Post API **(TO-DO)**
+- Search system  
+- Image upload to allow users to show off the condition of their toys 
+- User profile to keep track of your items currently listed for sale
+
 
 ### Sitemap
 ![Sitemap for RetroRocket](https://i.ibb.co/Tcxxt46/Screen-Shot-2021-02-25-at-10-06-57-am.png)
 
 ### Screenshots
-**(TO-DO)**
+![Landing Page](https://i.ibb.co/mz2LptY/Screen-Shot-2021-03-16-at-10-21-43-am.png)
+![Category Select](https://ibb.co/WVvqV1K)
+![New Listing Form](https://i.ibb.co/z42VVWb/Screen-Shot-2021-03-16-at-10-22-11-am.png)
+![Show Listing](https://ibb.co/QrNqWHW)
 
 ### Target Audience
 
@@ -56,9 +59,6 @@ RetroRocket is aimed at *Australian* users between the ages of *20 to 50* years 
 
 - As a *User*, I want to be able to sign up for an account.
 - As a *User*, I want a website that is simple to use.
-- As a *User*, I want to be able to access the website from all of my devices.
-- As a *User*, I want to know how much shipping I need to pay.
-- As a *Buyer*, I want to be able to save items I am interested in to look at later.
 - As a *Buyer*, I need to know how much each item costs.
 - As a *Buyer*, I need to know what condition each item is in to inform my purchase decisions.
 - As a *Seller*, I want to be able to upload images of exactly what I'm selling.
@@ -82,13 +82,13 @@ RetroRocket is aimed at *Australian* users between the ages of *20 to 50* years 
 ![New Listing Form Wireframe](https://i.ibb.co/nkZKvtz/Screen-Shot-2021-02-25-at-10-08-17-am.png)
 
 ## Entity Relationship Diagram
-![RetroRocket ERD](https://i.ibb.co/wgyHQwF/Retro-Rocket-ERD.png)
+![RetroRocket ERD](https://i.ibb.co/HBNDnn9/Screen-Shot-2021-03-18-at-8-20-26-am.png)
 
 ## Components/Abstractions
 
 RetroRocket is built using Ruby On Rails, and therefore is abstracted by the nature of the Rails architecture and the Model/View/Controller design system. 
 
-Users are a Model created with the Devise gem, which automatically authenticates Users to allow them access to buy and sell listings on RetroRocket, as well as edit/delete their own listings if they so choose.
+Users are a Model created with the Devise gem, which automatically authenticates Users to allow them access to buy and sell listings on RetroRocket, as well as edit/delete their own listings if they so choose. Additionally, Users have an attribute called "admin", which is a boolean value. If this is true, the User is given access to several other features, such as category creation. 
 
 Listing creation is handled by ActiveRecord in Rails, which creates a Model from parameters passed by a user in the New Listing form. Upon submission of this form, the listing is written to the database and can be displayed in the appropriate Views to Users.
 
@@ -96,51 +96,65 @@ Querying data sets of listings is done simply through the View, by selecting the
 
 ## Third-Party Service Integrations
 
-The **Australia Post API** is used for calculating shipping costs to different addresses within Australia. It also comes with built in address validation - no sending fake orders to fake addresses!
-
 Payments on RetroRocket are handled using the **Stripe** API to take card payments for items. Stripe also automatically handles all security aspects of payment processing.
 
 Image hosting for listing images and user profile images is managed by **Cloudinary**, a media hosting solution.
+
+The web application itself is hosted via **Heroku**'s hosting service.
 
 ## Models & ActiveRecord Relationships
 
 **Users:**
 - Have many Listings (Optional)
-- Have many Orders (Optional)
-- Have many Bookmarks (Optional)
-- Have one Image (Optional)
 
 **Listings:**
 - Have one Seller (Mandatory)
-- Have many Images (Optional)
+- Have one Image (Mandatory)
 - Have one Category (Mandatory)
 
 **Categories:**
 - Have many Listings (Optional)
 
-**Orders:**
-- Have one Seller (Mandatory)
-- Have one Buyer (Mandatory)
-- Have one Listing (Mandatory)
-
-**Bookmarks:**
-- Have one User (Mandatory)
-- Have one Listing (Mandatory)
 
 ## Database Relations
 
-Every User on RetroRocket is able to have multiple Listings (items they're selling) and Orders (items they have purchased) at once. Their user ID will be associated with each of these, allowing all sold and bought items to be listed on their profile for easy viewing.
-
-Images will also be available for Users to have as an icon to identify themselves. These will be associated with their User ID also to ensure the correct icon is associated with each user. Each user can only have one icon, but it can be updated.
+Every User on RetroRocket is able to have multiple Listings (items they're selling) at once. Their user ID will be associated with each of these, allowing all items they are selling to be listed on their profile for easy viewing.
 
 Each Listing will have a User ID associated with it as the "Seller" of the product. It will also be associated with a category by that Category ID. Additionally, listings can have images attached to them which are associated with the Listing ID.
 
-When a Listing is sold, it becomes an Order. Orders are attached to the Listing ID and retain all the information from their original listing. They also have a Buyer, associated with the User ID of the person who purchased the item. 
-
-Bookmarks are attached to a User ID of the person who bookmarked them, as well as the Listing ID of the listing being bookmarked.
 
 ## Database Schema
-**(TO-DO)**
+The following is a summary of the tables included in the schema.rb file for this project:
+
+**Categories:**
+- Category Name (String)
+
+**Listings:**
+- Listing Title (String)
+- Listing Description (Text)
+- User Id (The user selling the listing) (BigInt, FK)
+- Price (Money)
+- Condition (String)
+- Category Id (BigInt, FK)
+- Sold (Boolean)
+
+**Users:**
+- Email (String)
+- Encrypted Password (String)
+- Username (String)
+- Admin (Boolean)
+
+All tables were generated using Rails helper methods and migrated to the main database. Where Foreign Keys (FK) are present in the above data, the table is referencing another table in the denoted column. This forms the following relationships:
+
+- Each Listing MUST have one User Id (the person who creates the listing). This is used to show who is selling the product and to allow editing and deleting Listings by their associated User.
+- Each Listing MUST have one and only one Category. The Listing will show up in its associated Category's index page.
+- Each User can optionally have Many Listings, or none.
+- Each Category can optionally have Many Listings, or none.
+
+Additionally, the schema.rb file contains Active Storage Attachments and Active Storage Blobs tables. These are used for storing the Images associated with each Listing. 
+
+Tables also have a t.index line. These are used to efficiently call all rows from that table in a Model's "index" view, generated by default when using Rails helper methods. In this project, this is utilised, for example, on the landing page, which shows all Listings. 
+
 
 ## Task Allocation & Tracking
 
