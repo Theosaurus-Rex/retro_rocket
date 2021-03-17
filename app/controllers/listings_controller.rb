@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
 
   # GET /listings or /listings.json
   def index
-    @listings = Listing.all
+    @listings = Listing.all.reverse
   end
 
   # Search Listings Table using parameters from Search Bar
